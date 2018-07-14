@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Device;
-use App\Mail\DeviceWork;
+use App\Mail\AddedWorkDevice;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Session;
@@ -45,14 +45,15 @@ class DeviceController extends Controller
 
         if ($device->location === 'Home') {
             $device->save();
-            $request->session()->flash('status', 'Device saved!');
+            $request->session()->flash('status', 'Coords sent!');
             return redirect(route('device.index'));
         }
         else {
             $device->save();
 
-            Mail::to($request->user())->send(new DeviceWork($device));
-            $request->session()->flash('status', 'Mail sent!');
+            Mail::to($request->user())->send(new AddedWorkDevice($device));
+
+            $request->session()->flash('status', 'Coords & Mail sent!');
             return redirect(route('device.index'));
         }
     }

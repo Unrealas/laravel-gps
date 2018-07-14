@@ -17,7 +17,9 @@ class AppHelper
         $nominatim = new Nominatim($url);
 
         $reverse = $nominatim->newReverse()
-            ->latlon($lat, $long);
+            ->latlon($lat, $long)
+            ->language('en');
+
         return $nominatim->find($reverse);
     }
 

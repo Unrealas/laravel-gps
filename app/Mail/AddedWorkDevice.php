@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class DeviceWork extends Mailable
+class AddedWorkDevice extends Mailable
 {
     use Queueable, SerializesModels;
 
