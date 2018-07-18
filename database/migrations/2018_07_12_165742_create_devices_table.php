@@ -17,8 +17,8 @@ class CreateDevicesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('device_id',50);
-            $table->string('long');
-            $table->string('lat');
+            $table->decimal('long');
+            $table->decimal('lat');
             $table->string('location');
         });
     }

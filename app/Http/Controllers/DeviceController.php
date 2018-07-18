@@ -18,6 +18,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
+
         return view('device.index');
     }
 
@@ -32,8 +33,8 @@ class DeviceController extends Controller
 
         $request->validate([
             'device_id' => 'required|max:50|min:3',
-            'long' => 'required|min:2',
-            'lat' => 'required|min:2',
+            'long' => 'required|integer',
+            'lat' => 'required|integer',
         ]);
 
         $data = $request->all();
