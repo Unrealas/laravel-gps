@@ -25,6 +25,6 @@ Route::get('admin/{lat}/{long}/{device_id}', [
     'as' => 'show', 'uses' => 'AdminController@show']);
 
 Route::get('/mailable', function () {
-    $device= App\Device::find(6);
-    return new App\Mail\DeviceWork($device);
+    $device= App\Device::find(1);
+    return new App\Mail\AddedWorkDevice($device);
 });

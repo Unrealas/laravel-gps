@@ -38,7 +38,7 @@
                             <a class="nav-link" href="{{ route('home') }}">{{ __('Send Coords') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.index') }}">{{ __('Admin') }}</a>
+                            <a class="nav-link" href="{{ route('admin.index') }}">{{ __('Devices') }}</a>
                         </li>
                     </ul>
 

@@ -57,9 +57,4 @@ class DeviceController extends Controller
             return redirect(route('device.index'));
         }
     }
-
-    public function send(Request $request)
-    {
-
-    }
 }
