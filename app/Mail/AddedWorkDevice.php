@@ -35,7 +35,7 @@ class AddedWorkDevice extends Mailable
         $lat = $this->device->lat;
         $long = $this->device->long;
 
-        $result = \AppHelper::instance()->Nominatim($lat, $long);
+        $result = AppHelper::instance()->Nominatim($lat, $long);
         return $this->view('emails.devices')
             ->with([
                 'deviceName' => $this->device->device_id,

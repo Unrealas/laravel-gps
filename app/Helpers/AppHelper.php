@@ -5,14 +5,9 @@ use maxh\Nominatim\Nominatim;
 
 class AppHelper
 {
-    public function bladeHelper($someValue)
-    {
-        return "increment $someValue";
-    }
 
     public function Nominatim($lat,$long)
     {
-
         $url = "http://nominatim.openstreetmap.org/";
         $nominatim = new Nominatim($url);
 

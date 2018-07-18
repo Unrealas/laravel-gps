@@ -31,39 +31,43 @@ class AdminController extends Controller
                 $idLotLanArr[$value['id']] = $value;
             }
 
-            $zeroPoint = new Coordinate(0, 0);
-
-            $distsFrom0 = [];
-            foreach ($idLotLanArr as $item) {
-                $end = new Coordinate($item['lat'], $item['long']);
-                $res = ($zeroPoint->getDistance($end, new Vincenty())) / 1000;
-                $distsFrom0[$item['id']] = $res;
+            function calcDist($arr, $start)
+            {
+                $newarr = [];
+                foreach ($arr as $item) {
+                    $end = new Coordinate($item['lat'], $item['long']);
+                    $res = ($start->getDistance($end, new Vincenty())) / 1000;
+                    $newarr[$item['id']] = $res;
+                }
+                return $newarr;
             }
 
-            $farthest1 = array_search(max($distsFrom0), $distsFrom0);
+            ;
+            function getFarthestPointId($arr)
+            {
+                return array_search(max($arr), $arr);
+            }
+
+            $distsFrom0 = calcDist($idLotLanArr, new Coordinate(0, 0));
+
+            $farthest1 = getFarthestPointId($distsFrom0);
+
             $latLonExFarth = array_diff_key($idLotLanArr, [$farthest1 => 0]);
 
-            $newStart = new Coordinate($idLotLanArr[$farthest1]['lat'], $idLotLanArr[$farthest1]['long']);
+            $distsFromFarth = calcDist($latLonExFarth, new Coordinate($idLotLanArr[$farthest1]['lat'], $idLotLanArr[$farthest1]['long']));
 
-            $distsFromFarth = [];
-            foreach ($latLonExFarth as $item) {
-                $end = new Coordinate($item['lat'], $item['long']);
-                $res = ($newStart->getDistance($end, new Vincenty())) / 1000;
-                $distsFromFarth[$item['id']] = $res;
-            }
+            $farthest2 = getFarthestPointId($distsFromFarth);
 
-            $farthest2 = array_search(max($distsFromFarth), $distsFromFarth);
             $diff = round(max($distsFromFarth), 2, PHP_ROUND_HALF_EVEN);
 
             $farth1id = $idLotLanArr[$farthest1]['device_id'];
             $farth2id = $idLotLanArr[$farthest2]['device_id'];
 
             return view('admin.index', ['device' => $device, 'diff' => $diff, 'farth1' => $farth1id, 'farth2' => $farth2id]);
-
         }
         return view('admin.index', ['device' => $device]);
-
     }
+
 
     public function show($lat, $long, $device_id)
     {
