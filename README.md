@@ -16,4 +16,3 @@ Create database from migrations
 php artisan migrate 
 ```
 
-For receiving emails and .env file please write to julius.gurskis@gmail.com, your email will be authorized in mailgun.
